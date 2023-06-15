@@ -1,8 +1,8 @@
 #include <stdio.h>
 /**
- *  Description: main - prints out the sizes of various data types on the computer.
- *  this programm is compiled on gcc.
- *  Return: 0 if sucess.
+ * main - prints out the sizes of various data types on the computer.
+ * this programm is compiled on gcc.
+ * Return: 0 if sucess.
  */
 int main(void)
 {
@@ -17,5 +17,6 @@ int main(void)
 	printf("Size of a long int: %lu byte(s)\n", (unsigned long)sizeof(l));
 	printf("Size of a long long int: %lu byte(s)\n", (unsigned long)sizeof(ll));
 	printf("Size of a float: %lu byte(s)\n", (unsigned long)sizeof(f));
+
 	return (0);
 }
