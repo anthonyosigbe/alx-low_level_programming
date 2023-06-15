@@ -1,9 +1,9 @@
 #include <stdio.h>
 /**
- * main - prints out the sizes of various data types on the computer.
- * this programm is compiled on gcc.
- * Return: 0 if sucess.
- */
+* main - prints out the sizes of various data types on the computer.
+* this programm is compiled on gcc.
+* Return: Always 0 (Sucess)
+*/
 int main(void)
 {
 	char c;
