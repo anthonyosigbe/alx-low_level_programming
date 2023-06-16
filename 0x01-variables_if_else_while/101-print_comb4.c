@@ -11,19 +11,19 @@
  */
 int main(void)
 {
-	int digt_combo1, digt_combo2, digt_combo3;
+	int digt_comb1, digt_comb2, digt_comb3;
 
-	for (digt_combo1 = 0; digt_combo1 < 8; digt_combo1++)
+	for (digt_comb1 = 0; digt_comb1 < 8; digt_comb1++)
 	{
-		for (digt_combo2 = digt_combo1 + 1; digt_combo2 < 9; digt_combo2++)
+		for (digt_comb2 = digt_comb1 + 1; digt_comb2 < 9; digt_comb2++)
 		{
-			for (digt_combo3 = digt_combo2 + 1; digt_combo3 < 10; digt_combo3++)
+			for (digt_comb3 = digt_comb2 + 1; digt_comb3 < 10; digt_comb3++)
 			{
-				putchar((digt_combo1 % 10) + '0');
-				putchar((digt_combo2 % 10) + '0');
-				putchar((digt_combo3 % 10) + '0');
+				putchar((digt_comb1 % 10) + '0');
+				putchar((digt_comb2 % 10) + '0');
+				putchar((digt_comb3 % 10) + '0');
 
-				if (digt_combo1 == 7 && digt_combo2 == 8 && digt_combo1 == 9)
+				if (digt_comb1 == 7 && digt_comb2 == 8 && digt_comb3 == 9)
 					continue;
 
 				putchar(',');
