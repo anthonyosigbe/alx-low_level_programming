@@ -1,7 +1,7 @@
 <h1>C PROGRAMMING 0x00. C - Hello, World Tasks</h1>
 This project taught me about gcc compilation, main entry points, and text-printing routines in C.
 
-<h3> TASKS CARRIES OUT</h3>
+<h3> TASKS CARRIED OUT</h3>
 0-preprocessor - Bash script that executes the preprocessor on a C file stored in the variable $CFILE and writes the outcome to the file c.
 
 1. Compiler - A Bash script that compiles a non-linked C file stored in the variable $CFILE and saves the outcome in an output file with the same name but a .o extension.
