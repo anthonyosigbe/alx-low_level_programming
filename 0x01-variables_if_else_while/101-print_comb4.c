@@ -7,7 +7,6 @@
  *  printed in ascending order.
  *  putchar can only be used a maximum of eight 8 times
  *  char variable is not allowed
- *
  *  Return: Always 0 (Success).
  */
 int main(void)
