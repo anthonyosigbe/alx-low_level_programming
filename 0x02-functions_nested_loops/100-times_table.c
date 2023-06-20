@@ -13,33 +13,31 @@ void print_times_table(int n)
 		for (numb = 0; numb <= n; numb++)
 		{
 			_putchar('0');
-		}
 
-		for (mulp = 1; mulp <= n; mulp++)
-		{
-			_putchar(',');
-			_putchar(' ');
-
-			product = numb * mulp;
-
-			if (product <= 99)
-				_putchar(' ');
-			if (product <= 9)
+			for (mulp = 1; mulp <= n; mulp++)
+			{
+				_putchar(',');
 				_putchar(' ');
 
-			if (product >= 100)
-			{
-				_putchar((product / 100) + '0');
-				_putchar(((product / 10)) % 10 + '0');
-			}
+				product = numb * mulp;
 
-			else if (product <= 99 && product >= 10)
-			{
-				_putchar((product / 10) + '0');
-			}
+				if (product <= 99)
+					_putchar(' ');
+				if (product <= 9)
+					_putchar(' ');
 
+				if (product >= 100)
+				{
+					_putchar((product / 100) + '0');
+					_putchar(((product / 10)) % 10 + '0');
+				}
+				else if (product <= 99 && product >= 10)
+				{
+					_putchar((product / 10) + '0');
+				}
+				_putchar((product % 10) + '0');
+			}
 			_putchar('\n');
-
 		}
 	}
 }
