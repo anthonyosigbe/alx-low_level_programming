@@ -12,18 +12,17 @@ int main(void)
 	long fibonacci1 = 0, fibonacci2 = 1, value;
 
 	for (num_count = 0; num_count < 50; num_count++)
-
 	{
 		value = fibonacci1 + fibonacci2;
-	       printf("%lu", value);
+		printf("%lu", value);
 
-	       fibonacci1 = fibonacci2;
-		       fibonacci2 = value;
+		fibonacci1 = fibonacci2;
+		fibonacci2 = value;
 
-	       if (num_count == 49)
-		       printf("\n");
-	       else
-		       printf(", ");
+		if (num_count == 49)
+			printf("\n");
+		else
+			printf(", ");
 	}
 
 	return (0);
