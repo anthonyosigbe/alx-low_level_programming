@@ -1,1 +1,6 @@
-*main.c - ignore all files contianing main.c files
+*
+!*.c
+*-main.c
+_putchar.c
+ignore all files contianing the following listed files above
+
