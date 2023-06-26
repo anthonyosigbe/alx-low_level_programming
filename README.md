@@ -8,4 +8,5 @@
 <li>0x02. C - Functions, nested loops</li>
 <li>0x03. C - Debugging</li>
 <li>0x04. C - More Functions Nested Loops</li>
+<li>0x05. C - Pointers, Arrays and Strings</li>
 </ul>
