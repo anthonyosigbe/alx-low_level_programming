@@ -9,5 +9,5 @@
 <li>0x03. C - Debugging</li>
 <li>0x04. C - More Functions Nested Loops</li>
 <li>0x05. C - Pointers, Arrays and Strings</li>
-<li>0x05. C - More pointers, arrays and strings</li>
+<li>0x06. C - More pointers, arrays and strings</li>
 </ul>
