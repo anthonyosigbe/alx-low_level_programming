@@ -1,6 +1,12 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+/**
+ * File name: main.h
+ * Description: The prototypes of all functions provided,
+ * in the static library libmy.a are contained in this header file.
+ */
+
 int _putchar(char c);
 int _islower(int c);
 int _isalpha(int c);
