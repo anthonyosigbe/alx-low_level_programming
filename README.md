@@ -13,4 +13,5 @@
 <li>0x07. C - Even more pointers, arrays and strings</li>
 <li>0x08. C - Recursion</li>
 <li>0x09. C - Static libraries</li>
+<li>0x0A. C - argc, argv</li>
 </ul>
