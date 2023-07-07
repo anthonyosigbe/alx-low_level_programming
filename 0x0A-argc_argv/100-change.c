@@ -1,3 +1,4 @@
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,16 +7,14 @@
  * @argc: The number of arguments supplied.
  * @argv: An array of pointers to the arguments.
  *
- * Return: If the number of arguments is not exactly one - 1.
+ * Return: If the number of arguments is not exactly two - 1.
  * Otherwise - 0.
  */
 
 int main(int argc, char *argv[])
 {
-	int cents, coins;
-	int i;
-	int denominations[] = {25, 10, 5, 2, 1};
-	int numDenominations = sizeof(denominations) / sizeof(denominations[0]);
+	int cents;
+	int coins = 0;
 
 	if (argc != 2)
 	{
@@ -23,14 +22,35 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	cents = atoi(argv[1]);
-	coins = 0;
 
-	for (i = 0; i < numDenominations; i++)
+	while (cents > 0)
 	{
-		coins += cents / denominations[i];
-		cents %= denominations[i];
+		if (cents >= 25)
+		{
+			coins += cents / 25;
+			cents %= 25;
+		}
+		else if (cents >= 10)
+		{
+			coins += cents / 10;
+			cents %= 10;
+		}
+		else if (cents >= 5)
+		{
+			coins += cents / 5;
+			cents %= 5;
+		}
+		else if (cents >= 2)
+		{
+			coins += cents / 2;
+			cents %= 2;
+		}
+		else
+		{
+			coins += cents;
+			cents = 0;
+		}
 	}
 	printf("%d\n", coins);
-
 	return (0);
 }
