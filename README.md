@@ -14,4 +14,5 @@
 <li>0x08. C - Recursion</li>
 <li>0x09. C - Static libraries</li>
 <li>0x0A. C - argc, argv</li>
+<li>0x0B. C - malloc, free - Memory Allocation</li>
 </ul>
