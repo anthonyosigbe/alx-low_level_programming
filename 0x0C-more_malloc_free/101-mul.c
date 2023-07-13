@@ -1,10 +1,17 @@
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 
+int validateInput(const char *str);
+int multiply(int num1, int num2);
+int main(int argc, char *argv[]);
+int multiply(int num1, int num2)
+
 /**
  * multiply - Multiplies two integers.
+ * Description: Multiplies two numbers.
  * @num1: The first integer.
  * @num2: The second integer.
  *
@@ -27,9 +34,7 @@ int validateInput(const char *str);
  * @argv: An array of pointers to the arguments.
  *
  * Description: Multiplies two positive numbers provided as,
- * command-line arguments,
- * The program checks if the correct number of arguments is provided,
- * and if each argument contains only digits.
+ * command-line arguments.
  * It then converts the arguments to integers,
  * calculates their product using the multiply function,
  * and prints the result.
