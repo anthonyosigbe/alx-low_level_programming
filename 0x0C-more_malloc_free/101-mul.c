@@ -7,7 +7,7 @@
 int validateInput(const char *str);
 int multiply(int num1, int num2);
 int main(int argc, char *argv[]);
-int multiply(int num1, int num2)
+int multiply(int num1, int num2);
 
 /**
  * multiply - Multiplies two integers.
