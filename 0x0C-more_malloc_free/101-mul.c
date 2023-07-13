@@ -1,98 +1,217 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
+#include <stdio.h>
 
-int validateInput(const char *str);
-int multiply(int num1, int num2);
-int main(int argc, char *argv[]);
-int multiply(int num1, int num2);
+int stringLength(char *str);
+char *createCharArray(int size);
+char *removeLeadingZeroes(char *str);
+int getDigit(char c);
+void multiplyByDigit(char *result, char *number, int digit, int leadingZeroes);
+void addNumbers(char *sum, char *nextNum, int nextLength);
 
 /**
- * multiply - Multiplies two integers.
- * Description: Multiplies two numbers.
- * @num1: The first integer.
- * @num2: The second integer.
+ * stringLength - Finds the length of a string.
+ * @str: The string to be measured.
  *
- * Return: The product of num1 and num2.
+ * Return: The length of the string.
  */
+int stringLength(char *str)
+{
+	int length = 0;
 
-int multiply(int num1, int num2);
+	while (*str++)
+		length++;
+	return (length);
+}
 
 /**
- * validateInput - Validates if a string contains only digits.
- * @str: The string to validate.
+ * createCharArray - Creates an array of chars and initializes it with,
+ * the character 'x'. Adds a terminating null byte.
+ * @size: The size of the array to be initialized.
+ * Description: If there is insufficient space,
+ * the function exits with a status of 98.
+ * Return: A pointer to the array.
+ */
+char *createCharArray(int size)
+{
+	char *array;
+	int index;
+
+	array = malloc(sizeof(char) * size);
+
+	if (array == NULL)
+		exit(98);
+
+	for (index = 0; index < (size - 1); index++)
+		array[index] = 'x';
+	array[index] = '\0';
+	return (array);
+}
+
+/**
+ * removeLeadingZeroes - Removes leading zeroes from a string of numbers.
+ * @str: The string of numbers to be processed.
  *
- * Return: 1 if the string contains only digits, 0 otherwise.
+ * Return: A pointer to the next non-zero element.
  */
+char *removeLeadingZeroes(char *str)
+{
+	while (*str && *str == '0')
+		str++;
 
-int validateInput(const char *str);
+	return (str);
+}
+
 /**
- * main - Entry point of the program.
- * @argc: The number of command-line arguments.
+ * getDigit - Converts a digit character to a corresponding int.
+ * @c: The character to be converted.
+ *
+ * Description: If c is a non-digit, the function exits with a status of 98.
+ *
+ * Return: The converted int.
+ */
+int getDigit(char c)
+{
+	int digit = c - '0';
+
+	if (digit < 0 || digit > 9)
+	{
+		printf("Error\n");
+		exit(98);
+	}
+	return (digit);
+}
+
+/**
+ * multiplyByDigit - Multiplies a string of numbers by a single digit.
+ * @result: The buffer to store the result.
+ * @number: The string of numbers.
+ * @digit: The single digit.
+ * @leadingZeroes: The necessary number of leading zeroes.
+ *
+ * Description: If the number contains a non-digit character,
+ * the function exits with a status value of 98.
+ */
+void multiplyByDigit(char *result, char *number, int digit, int leadingZeroes)
+{
+	int numberLength, product, tens = 0;
+
+	numberLength = stringLength(number) - 1;
+	number += numberLength;
+
+	while (*result)
+	{
+		*result = 'x';
+		result++;
+	}
+	result--;
+
+	while (leadingZeroes--)
+	{
+		*result = '0';
+		result--;
+	}
+	for (; numberLength >= 0; numberLength--, number--, result--)
+	{
+		if (*number < '0' || *number > '9')
+		{
+			printf("Error\n");
+			exit(98);
+		}
+		product = (*number - '0') * digit;
+		product += tens;
+		*result = (product % 10) + '0';
+		tens = product / 10;
+	}
+	if (tens)
+		*result = (tens % 10) + '0';
+}
+
+/**
+ * addNumbers - Adds the numbers stored in two strings.
+ * @sum: The buffer storing the running sum.
+ * @nextNum: The next number to be added.
+ * @nextLength: The length of nextNum.
+ */
+void addNumbers(char *sum, char *nextNum, int nextLength)
+{
+	int total, tens = 0;
+
+	while (*(sum + 1))
+		sum++;
+
+	while (*(nextNum + 1))
+		nextNum++;
+
+	for (; *sum != 'x'; sum--)
+	{
+		total = (*sum - '0') + (*nextNum - '0');
+		total += tens;
+		*sum = (total % 10) + '0';
+		tens = total / 10;
+		nextNum--;
+		nextLength--;
+	}
+	for (; nextLength >= 0 && *nextNum != 'x'; nextLength--)
+	{
+		total = (*nextNum - '0');
+		total += tens;
+		*sum = (total % 10) + '0';
+		tens = total / 10;
+		sum--;
+		nextNum--;
+	}
+	if (tens)
+		*sum = (tens % 10) + '0';
+}
+
+/**
+ * main - Multiplies two positive numbers.
+ * @argc: The number of arguments passed to the program.
  * @argv: An array of pointers to the arguments.
  *
- * Description: Multiplies two positive numbers provided as,
- * command-line arguments.
- * It then converts the arguments to integers,
- * calculates their product using the multiply function,
- * and prints the result.
- *
- * Return: 0 on success, or 98 if the number of arguments is incorrect or,
- * the arguments contain non-digits. Print Error.
+ * Description: If the number of arguments is incorrect or one number,
+ * contains non-digits, the function exits with a status of 98.
+ * Return: Always 0.
  */
-
 int main(int argc, char *argv[])
 {
-	int num1, num2, result;
+	char *finalProduct, *nextProduct;
+	int size, index, digit, leadingZeroes = 0;
 
 	if (argc != 3)
 	{
 		printf("Error\n");
-		return (98);
+		exit(98);
 	}
-	if (!validateInput(argv[1]) || !validateInput(argv[2]))
+	if (*(argv[1]) == '0')
+		argv[1] = removeLeadingZeroes(argv[1]);
+	if (*(argv[2]) == '0')
+		argv[2] = removeLeadingZeroes(argv[2]);
+	if (*(argv[1]) == '\0' || *(argv[2]) == '\0')
 	{
-		printf("Error\n");
-		return (98);
+		printf("0\n");
+		return (0);
 	}
+	size = stringLength(argv[1]) + stringLength(argv[2]);
+	finalProduct = createCharArray(size + 1);
+	nextProduct = createCharArray(size + 1);
 
-	num1 = atoi(argv[1]);
-	num2 = atoi(argv[2]);
-	result = multiply(num1, num2);
+	for (index = stringLength(argv[2]) - 1; index >= 0; index--)
+	{
+		digit = getDigit(*(argv[2] + index));
+		multiplyByDigit(nextProduct, argv[1], digit, leadingZeroes++);
+		addNumbers(finalProduct, nextProduct, size - 1);
+	}
+	for (index = 0; finalProduct[index]; index++)
+	{
+		if (finalProduct[index] != 'x')
+			putchar(finalProduct[index]);
+	}
+	putchar('\n');
+	free(nextProduct);
+	free(finalProduct);
 
-	printf("%d\n", result);
 	return (0);
 }
 
-/**
- * multiply - Multiplies two integers.
- * @num1: The first integer.
- * @num2: The second integer.
- *
- * Return: The product of num1 and num2.
- */
-
-int multiply(int num1, int num2)
-{
-	return (num1 * num2);
-}
-
-/**
- * validateInput - Validates if a string contains only digits.
- * @str: The string to validate.
- *
- * Return: 1 if the string contains only digits, 0 otherwise.
- */
-
-int validateInput(const char *str)
-{
-	while (*str != '\0')
-	{
-		if (!isdigit(*str))
-			return (0);
-		str++;
-	}
-	return (1);
-}
