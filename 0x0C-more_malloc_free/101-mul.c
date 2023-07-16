@@ -1,3 +1,4 @@
+#include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -40,7 +41,7 @@ char *createCharArray(int size)
 	array = malloc(sizeof(char) * size);
 
 	if (array == NULL)
-		exit(98);
+		exit(EXIT_FAILURE);
 
 	for (index = 0; index < (size - 1); index++)
 		array[index] = 'x';
@@ -77,7 +78,7 @@ int getDigit(char c)
 	if (digit < 0 || digit > 9)
 	{
 		printf("Error\n");
-		exit(98);
+		exit(EXIT_FAILURE);
 	}
 	return (digit);
 }
