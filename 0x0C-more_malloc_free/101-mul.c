@@ -1,6 +1,6 @@
-#include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 int stringLength(char *str);
 char *createCharArray(int size);
@@ -182,7 +182,7 @@ int main(int argc, char *argv[])
 	if (argc != 3)
 	{
 		printf("Error\n");
-		exit(98);
+		exit(EXIT_FAILURE);
 	}
 	if (*(argv[1]) == '0')
 		argv[1] = removeLeadingZeroes(argv[1]);
