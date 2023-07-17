@@ -17,4 +17,5 @@
 <li>0x0B. C - malloc, free - Memory Allocation</li>
 <li>0x0C. C - More malloc, free - Memory Allocation</li>
 <li>0x0D. C - Preprocessor</li>
+<li>0x0E. C - Structures, typedef</li>
 </ul>
