@@ -65,16 +65,15 @@ void print_string(va_list arg)
 
 /**
  * print_all - Prints a combination of characters,
- * integers, floats, and strings
- * from the argument list, separated by a comma and space,
- * followed by a new line.
+ * integers, floats, and strings from the argument list,
+ * separated by a comma and space, followed by a new line.
  * @format: A string representing the argument types,
  * (c: char, i: integer, f: float, s: string).
  * @...: A variable number of arguments to be printed.
  *
  * Description: Any argument not of type char, int, float,
- * or char * is ignored.
- * If a string argument is NULL, "(nil)" is printed instead.
+ * or char * is ignored. If a string argument is NULL,
+ * "(nil)" is printed instead.
  */
 
 void print_all(const char * const format, ...)
@@ -82,7 +81,7 @@ void print_all(const char * const format, ...)
 	va_list args;
 	int i = 0, x = 0;
 	const char *separator = "";
-	printFormat_t functions[] = {
+	printer_t funcs[] = {
 		{"c", print_char},
 		{"i", print_int},
 		{"f", print_float},
@@ -95,7 +94,7 @@ void print_all(const char * const format, ...)
 	{
 		x = 0;
 
-		while (x < 4 && format[i] != functions[x].format_specifier[0])
+		while (x < 4 && format[i] != funcs[x].format_specifier[0])
 		{
 			x++;
 		}
@@ -103,7 +102,7 @@ void print_all(const char * const format, ...)
 		if (x < 4)
 		{
 			printf("%s", separator);
-			functions[x].print(args);
+			funcs[x].print(args);
 			separator = ", ";
 		}
 		i++;
