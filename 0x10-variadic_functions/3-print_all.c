@@ -81,7 +81,7 @@ void print_all(const char * const format, ...)
 	va_list args;
 	int i = 0, x = 0;
 	const char *separator = "";
-	PrintFormat_t functions[] = {
+	printFormat_t functions[] = {
 		{"c", print_char},
 		{"i", print_int},
 		{"f", print_float},
