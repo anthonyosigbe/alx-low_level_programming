@@ -14,8 +14,8 @@ void print_float(char *separator, va_list args);
 void print_char_ptr(char *separator, va_list args);
 
 /**
- * struct format_types - Struct format_types
- * @identifier: The conversion specifier
+ * struct printFormat - printFormat
+ * @format_specifier: The conversion specifier
  * @f: The function pointer
  */
 typedef struct printFormat
