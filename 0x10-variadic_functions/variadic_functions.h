@@ -12,11 +12,11 @@
  * corresponding to the format specifier.
  */
 
-typedef struct printFormat
+typedef struct printer
 {
 	char *format_specifier;
         void (*print)(va_list arg);
-} printFormat_t;
+} printer_t;
 
 
 
