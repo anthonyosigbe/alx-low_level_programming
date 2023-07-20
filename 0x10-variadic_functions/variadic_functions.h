@@ -3,12 +3,6 @@
 
 #include <stdarg.h>
 
-int _putchar(char c);
-int sum_them_all(const unsigned int n, ...);
-void print_numbers(const char *separator, const unsigned int n, ...);
-void print_strings(const char *separator, const unsigned int n, ...);
-void print_all(const char * const format, ...);
-
 /**
  * struct PrintFormat - A new struct type defining a printer,
  * for different data types.
@@ -21,7 +15,15 @@ void print_all(const char * const format, ...);
 typedef struct PrintFormat
 {
 	char *format_specifier;
-	void (*print)(va_list arg);
+        void (*print)(va_list arg);
 } PrintFormat_t;
+
+
+
+int _putchar(char c);
+int sum_them_all(const unsigned int n, ...);
+void print_numbers(const char *separator, const unsigned int n, ...);
+void print_strings(const char *separator, const unsigned int n, ...);
+void print_all(const char * const format, ...);
 
 #endif
