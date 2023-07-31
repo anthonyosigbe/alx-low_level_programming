@@ -21,5 +21,5 @@
 <li>0x0F. C - Function pointers</li>
 <li>0x10C. C - Variadic functions</li>
 <li>0x12C. C - Singly linked lists</li>
-<li>0x12C. C - More singly linked lists</li>
+<li>0x13. C - More singly linked lists</li>
 </ul>
