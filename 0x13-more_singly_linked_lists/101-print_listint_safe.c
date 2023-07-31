@@ -24,6 +24,7 @@ size_t print_listint_safe(const listint_t *head)
 	{
 		nodeCount += 1;
 		printf("[%p] %i\n", (void *)current, current->n);
+
 		current = current->next;
 		runner = runner->next;
 	}
@@ -32,5 +33,6 @@ size_t print_listint_safe(const listint_t *head)
 
 	if (runner)
 		printf("-> [%p] %i\n", (void *)runner, runner->n);
+
 	return (nodeCount);
 }
