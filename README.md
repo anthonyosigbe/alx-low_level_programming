@@ -22,4 +22,5 @@
 <li>0x10C. C - Variadic functions</li>
 <li>0x12C. C - Singly linked lists</li>
 <li>0x13. C - More singly linked lists</li>
+<li>0x14. C - Bit manipulation</li>
 </ul>
