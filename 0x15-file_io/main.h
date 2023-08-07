@@ -16,6 +16,5 @@ int _strlen(char *s);
 char *allocate_temp_buffer(char *file);
 void close_file_descriptor(int fd);
 void read_write_files(int source_fd, int dest_fd);
-int main(int argc, char *argv[]);
 
 #endif
