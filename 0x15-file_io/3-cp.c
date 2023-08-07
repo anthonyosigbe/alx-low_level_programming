@@ -1,126 +1,65 @@
 #include "main.h"
 
 /**
- * allocate_temp_buffer - Allocates memory for a temporary,
- * buffer of 1024 bytes.
- * @file: The name of the file the temporary buffer is being allocated for.
+ * main - Entry point of the program.
+ * @argc: The argument count.
+ * @argv: The argument vector.
  *
- * Return: A pointer to the newly-allocated temporary buffer.
+ * Return: Always 0 on successful completion.
  */
-
-char *allocate_temp_buffer(char *file)
+int main(int argc, char **argv)
 {
-	char *temp_buffer;
-
-	temp_buffer = malloc(sizeof(char) * 1024);
-
-	if (temp_buffer == NULL)
-	{
-		dprintf(STDERR_FILENO,
-				"Error: Can't allocate memory for %s\n", file);
-		exit(99);
-	}
-	return (temp_buffer);
-}
-
-/**
- * close_file_descriptor - Closes a file descriptor.
- * @fd: The file descriptor to be closed.
- */
-
-void close_file_descriptor(int fd)
-{
-	int result;
-
-	result = close(fd);
-
-	if (result == -1)
-	{
-		dprintf(STDERR_FILENO,
-				"Error: Can't close file descriptor %d\n", fd);
-		exit(100);
-	}
-}
-
-/**
- * read_write_files - Reads data from the source file,
- * and writes to the destination file.
- * @source_fd: The file descriptor of the source file.
- * @dest_fd: The file descriptor of the destination file.
- */
-
-void read_write_files(int source_fd, int dest_fd)
-{
-	char temp_buffer[1024];
-	int read_bytes, written_bytes;
-
-	do {
-		read_bytes = read(source_fd, temp_buffer, 1024);
-		if (read_bytes == -1)
-		{
-			dprintf(STDERR_FILENO,
-					"Error: Can't read from the source file\n");
-			exit(98);
-		}
-
-		written_bytes = write(dest_fd, temp_buffer, read_bytes);
-
-		if (written_bytes == -1)
-		{
-			dprintf(STDERR_FILENO,
-					"Error: Can't write to the destination file\n");
-			exit(99);
-		}
-	} while (read_bytes > 0);
-}
-
-/**
- * main - Copies the contents of a file to another file.
- * @argc: The number of arguments supplied to the program.
- * @argv: An array of pointers to the arguments.
- *
- * Description: If the argument count is incorrect - exit code 97.
- * If file_from does not exist or cannot be read - exit code 98.
- * If file_to cannot be created or written to - exit code 99.
- * If file_to or file_from cannot be closed - exit code 100.
- *
- *  Return: 0 on success.
- */
-
-int main(int argc, char *argv[])
-{
-	int source_fd, dest_fd;
-	char *temp_buffer;
-
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
+	file_copy(argv[1], argv[2]);
+	exit(0);
+}
 
-	temp_buffer = allocate_temp_buffer(argv[2]);
+/**
+ * file_copy - Copies the contents from one file to another.
+ * @src: The source file name.
+ * @dest: The destination file name.
+ *
+ * Return: Nothing.
+ */
+void file_copy(const char *src, const char *dest)
+{
+	int src_fd, dest_fd, bytes_read;
+	char buffer[1024];
 
-	source_fd = open(argv[1], O_RDONLY);
-	if (source_fd == -1)
+	src_fd = open(src, O_RDONLY);
+	if (!src || src_fd == -1)
 	{
-		dprintf(STDERR_FILENO,
-				"Error: Can't read from the source file\n");
-		free(temp_buffer);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", src);
 		exit(98);
 	}
 
-	dest_fd = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	if (dest_fd == -1)
+	dest_fd = open(dest, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	while ((bytes_read = read(src_fd, buffer, 1024)) > 0)
 	{
-		dprintf(STDERR_FILENO,
-				"Error: Can't write to the destination file\n");
-		free(temp_buffer);
-		exit(99);
+		if (write(dest_fd, buffer, bytes_read) != bytes_read || dest_fd == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", dest);
+			exit(99);
+		}
 	}
-	read_write_files(source_fd, dest_fd);
-	free(temp_buffer);
-	close_file_descriptor(source_fd);
-	close_file_descriptor(dest_fd);
 
-	return (0);
+	if (bytes_read == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", src);
+		exit(98);
+	}
+	if (close(src_fd) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", src_fd);
+		exit(100);
+	}
+	if (close(dest_fd) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", dest_fd);
+		exit(100);
+	}
 }
