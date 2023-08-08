@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 void validate_elf(unsigned char *e_ident);
-void display_elf_header_info(Elf64_Ehdr *header);
+void display_elf_header_info(Elf32_Ehdr *header);
 void close_file_descriptor(int fd);
 
 /**
@@ -37,7 +37,7 @@ void validate_elf(unsigned char *e_ident)
  * contained in the ELF header.
  * @header: A pointer to the ELF header structure.
  */
-void display_elf_header_info(Elf64_Ehdr *header)
+void display_elf_header_info(Elf32_Ehdr *header)
 {
 	int index;
 	unsigned int e_type;
@@ -81,7 +81,7 @@ void display_elf_header_info(Elf64_Ehdr *header)
 			printf("2's complement, big endian\n");
 			break;
 		default:
-			printf("<unknown: %x>\n", header->e_ident[EI_CLASS]);
+			printf("<unknown: %x>\n", header->e_ident[EI_DATA]);
 	}
 	printf("  Version: %d", header->e_ident[EI_VERSION]);
 	switch (header->e_ident[EI_VERSION])
@@ -107,6 +107,7 @@ void display_elf_header_info(Elf64_Ehdr *header)
 			break;
 		default:
 			printf("<unknown: %x>\n", header->e_ident[EI_OSABI]);
+			break;
 	}
 	printf("  ABI Version: %d\n", header->e_ident[EI_ABIVERSION]);
 	e_type = header->e_type;
@@ -173,7 +174,7 @@ void close_file_descriptor(int fd)
  */
 int main(int __attribute__((__unused__)) argc, char *argv[])
 {
-	Elf64_Ehdr *header;
+	Elf32_Ehdr *header;
 	int fd, read_result;
 
 	fd = open(argv[1], O_RDONLY);
@@ -191,7 +192,7 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 		exit(98);
 	}
 
-	read_result = read(fd, header, sizeof(Elf64_Ehdr));
+	read_result = read(fd, header, sizeof(Elf32_Ehdr));
 	if (read_result == -1)
 	{
 		free(header);
