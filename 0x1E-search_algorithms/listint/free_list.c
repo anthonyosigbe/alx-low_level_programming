@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "../search_algos.h"
 
 /**
